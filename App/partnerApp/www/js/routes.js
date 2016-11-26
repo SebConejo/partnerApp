@@ -16,10 +16,10 @@ angular.module('app.routes', [])
     controller: 'page1Ctrl'
   })
 
-  .state('homaPage', {
-    url: '/HomePage',
-    templateUrl: 'templates/homaPage.html',
-    controller: 'homaPageCtrl'
+  .state('partnerHomePage', {
+    url: '/partnerHomePage',
+    templateUrl: 'templates/partnerHomePage.html',
+    controller: 'partnerpartnerHomePageCtrl'
   })
 
   .state('successModal', {
