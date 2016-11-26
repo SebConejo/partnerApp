@@ -15,9 +15,9 @@ angular.module('app.routes', [])
             })
 
             .state('summary', {
-                url: '/summary',
-                templateUrl: 'templates/page1.html',
-                controller: 'page1Ctrl'
+                url: '/summary:firstName:lastName:amount:id',
+                templateUrl: 'templates/summary.html',
+                controller: 'summaryCtrl'
             })
 
 
@@ -27,10 +27,10 @@ angular.module('app.routes', [])
                 controller: 'successModalCtrl'
             })
 
-            .state('errorModel', {
+            .state('errorModal', {
                 url: '/ErrorModal',
-                templateUrl: 'templates/errorModel.html',
-                controller: 'errorModelCtrl'
+                templateUrl: 'templates/errorModal.html',
+                controller: 'errorModalCtrl'
             });
 
         $urlRouterProvider.otherwise('/recapPage')

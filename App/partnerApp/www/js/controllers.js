@@ -1,31 +1,53 @@
 angular.module('app.controllers', [])
 
-    .controller('page1Ctrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('summaryCtrl', ['$scope', '$state', '$stateParams', 'CustomerService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams) {
+        function ($scope, $state, $stateParams, CustomerService) {
+
+            // set values to display
+            $scope.amount = $stateParams.amount;
+            $scope.customer = {
+                firstName: $stateParams.firstName,
+                lastName: $stateParams.lastName
+            };
 
             $scope.makeTransaction = function () {
-                // requete API PUT sur Customer
-                // if success state.go successmodak
-                // if error state.go errorModal
+                CustomerService.update({id: $stateParams.id,
+                    transaction_amount: $stateParams.amount
+                }).then(function (result) {
+                    $state.go('successModal');
+                }, function (error) {
+                    $state.go('errorModal');
+                });
             }
-
         }])
 
-    .controller('homeCtrl', ['$scope', '$stateParams',  // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('homeCtrl', ['$scope', '$state', '$stateParams', 'CustomerService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $stateParams) {
+        function ($scope, $state, $stateParams, CustomerService) {
+
+            // fake data waiting for Scanner Srevice
+            var customerId = 1;
+            var token = "202020";
+            var amount = "2";
+
+            CustomerService.show(customerId, token).then(function (results) {
+                $state.go('summary', {
+                    firstName: results.first_name,
+                    lastName: results.last_name,
+                    amount: amount,
+                    token: token,
+                    id: results.id
+                });
+            });
 
             $scope.scan = function () {
                 // Scan Barcode
                 // récupèrer le token
-                var token = "1088768060";
-                var amount = "3";
 
-                // faire une requête ajax pour récup le nom et prénom du client
-                // then state go to Summary avec les données du customer
+
             };
 
         }])
@@ -38,7 +60,7 @@ angular.module('app.controllers', [])
 
         }])
 
-    .controller('errorModelCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('errorModalCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $stateParams) {

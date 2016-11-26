@@ -10,17 +10,17 @@
     <div id="page1-container5">
       <div id="page1-markdown13" style="text-align:center;" class="show-list-numbers-and-dots">
         <p style="color:#000000;">
-          <strong>X</strong> sera debité de</p>
+          <strong>{{ customer.firstName }} {{ customer.lastName }}</strong> sera debité de</p>
       </div>
     </div>
     <div class="spacer" style="width: 300px; height: 27px;"></div>
     <div id="page1-markdown8" style="text-align:center;" class="show-list-numbers-and-dots">
-      <p style="color:#000000;font-size:50px;">3 €</p>
+      <p style="color:#000000;font-size:50px;">{{ amount }} €</p>
     </div>
     <div class="spacer" style="width: 300px; height: 121px;"></div>
     <div id="page1-markdown14" style="text-align:center;" class="show-list-numbers-and-dots">
       <p style="color:#000000;">Avant validation, merci de vérifier l'identité du client avec son billet d'avion</p>
     </div>
-    <button id="page1-button1" class="button button-positive  button-block button-clear">--&gt; VALIDER L'ACHAT</button>
+    <button id="page1-button1" class="button button-positive  button-block button-clear" ng-click="makeTransaction()">--&gt; VALIDER L'ACHAT</button>
   </ion-content>
 </ion-view>
