@@ -15,7 +15,7 @@ angular.module('app.routes', [])
             })
 
             .state('summary', {
-                url: '/summary:firstName:lastName:amount:id',
+                url: '/summary:amount:token',
                 templateUrl: 'templates/summary.html',
                 controller: 'summaryCtrl'
             })

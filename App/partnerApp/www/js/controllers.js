@@ -5,15 +5,12 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $state, $stateParams, CustomerService) {
 
-            // set values to display
+            // set value to display
             $scope.amount = $stateParams.amount;
-            $scope.customer = {
-                firstName: $stateParams.firstName,
-                lastName: $stateParams.lastName
-            };
 
             $scope.makeTransaction = function () {
-                CustomerService.update({id: $stateParams.id,
+                CustomerService.update({
+                    token: $stateParams.token,
                     transaction_amount: $stateParams.amount
                 }).then(function (result) {
                     $state.go('successModal');
@@ -28,27 +25,18 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $state, $stateParams, CustomerService) {
 
-            // fake data waiting for Scanner Srevice
-            var customerId = 1;
-            var token = "202020";
-            var amount = "2";
-
-            CustomerService.show(customerId, token).then(function (results) {
-                $state.go('summary', {
-                    firstName: results.first_name,
-                    lastName: results.last_name,
-                    amount: amount,
-                    token: token,
-                    id: results.id
-                });
-            });
-
             $scope.scan = function () {
                 // Scan Barcode
                 // récupèrer le token
 
-
+                // fake data waiting for Scanner Srevice
+                var token = "202020";
+                var amount = "2";
+                $state.go('summary', {amount: amount, token: token});
             };
+
+            // TODO : call Scan manually
+            $scope.scan();
 
         }])
 
