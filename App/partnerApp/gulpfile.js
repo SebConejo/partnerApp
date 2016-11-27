@@ -5,6 +5,7 @@ var concat = require('gulp-concat');
 var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
+var browserSync = require('browser-sync').create();
 var sh = require('shelljs');
 
 var paths = {
@@ -26,8 +27,22 @@ gulp.task('sass', function(done) {
     .on('end', done);
 });
 
-gulp.task('watch', function() {
-  gulp.watch(paths.sass, ['sass']);
+
+//Livereload with BrowserSync
+gulp.task('sync', function () {
+    var files = [
+        './scss/**/*.scss',
+        './scss/*.scss',
+        './index.html'
+    ];
+    browserSync.init(files, {
+        browser: ["google chrome"],
+        proxy: "partnerapp.app"
+    });
+});
+
+gulp.task('watch', ['sass', 'sync'], function () {
+    gulp.watch(paths.sass, ['sass']);
 });
 
 gulp.task('install', ['git-check'], function() {
