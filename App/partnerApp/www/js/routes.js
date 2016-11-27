@@ -33,7 +33,7 @@ angular.module('app.routes', [])
                 controller: 'errorModalCtrl'
             });
 
-        $urlRouterProvider.otherwise('/recapPage')
+        $urlRouterProvider.otherwise('/')
 
 
     });

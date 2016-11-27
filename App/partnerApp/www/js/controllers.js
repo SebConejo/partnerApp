@@ -1,9 +1,9 @@
 angular.module('app.controllers', [])
 
-    .controller('summaryCtrl', ['$scope', '$state', '$stateParams', 'CustomerService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('summaryCtrl', ['$scope', '$state', '$stateParams', 'CustomerService','$cordovaBarcodeScanner', '$ionicLoading', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $state, $stateParams, CustomerService) {
+        function ($scope, $state, $stateParams, CustomerService, $cordovaBarcodeScanner, $ionicLoading) {
 
             console.log($stateParams);
 
@@ -22,24 +22,30 @@ angular.module('app.controllers', [])
             }
         }])
 
-    .controller('homeCtrl', ['$scope', '$state', '$stateParams', 'CustomerService', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
+    .controller('homeCtrl', ['$scope', '$state', '$stateParams', 'CustomerService','$cordovaBarcodeScanner', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
 // You can include any angular dependencies as parameters for this function
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
-        function ($scope, $state, $stateParams, CustomerService) {
+        function ($scope, $state, $stateParams, CustomerService, $cordovaBarcodeScanner) {
+
+            $scope.formData = {token:"", amount:""};
 
             $scope.scan = function () {
+                $cordovaBarcodeScanner
+                .scan()
+                .then(function(barcodeData) {
+                    $scope.formData.token = barcodeData.text;
+                    $state.go('summary', $scope.formData);
+
+                }, function(error) {
+
+                // An error occurred
+                });
+
                 // Scan Barcode
                 // récupèrer le token
 
                 // fake data waiting for Scanner Srevice
-                var token = "202020";
-                var amount = "33";
-                $state.go('summary', {amount: amount, token: token});
             };
-
-            // TODO : call Scan manually
-            $scope.scan();
-
         }])
 
     .controller('successModalCtrl', ['$scope', '$stateParams', // The following is the constructor function for this page's controller. See https://docs.angularjs.org/guide/controller
