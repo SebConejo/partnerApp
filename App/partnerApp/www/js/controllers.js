@@ -5,6 +5,8 @@ angular.module('app.controllers', [])
 // TIP: Access Route Parameters for your page via $stateParams.parameterName
         function ($scope, $state, $stateParams, CustomerService) {
 
+            console.log($stateParams);
+
             // set value to display
             $scope.amount = $stateParams.amount;
 
@@ -31,7 +33,7 @@ angular.module('app.controllers', [])
 
                 // fake data waiting for Scanner Srevice
                 var token = "202020";
-                var amount = "2";
+                var amount = "33";
                 $state.go('summary', {amount: amount, token: token});
             };
 
