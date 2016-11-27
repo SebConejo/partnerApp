@@ -3,3 +3,34 @@
 * Buttons
 * --------------------------------------------------
 */
+
+
+.btn-wrap {
+    display: -webkit-flex;
+    display: -moz-flex;
+    display: -ms-flex;
+    display: -o-flex;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    flex-direction: column;
+}
+.btn-rounded {
+    border-radius: 120px;
+    width: 64px;
+    height: 64px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    a {
+        line-height: 64px;
+        display: flex;
+    }
+}
+
+.bg-balanced {
+    background-color: $balanced;
+}
