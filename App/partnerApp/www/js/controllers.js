@@ -13,7 +13,7 @@ angular.module('app.controllers', [])
             $scope.makeTransaction = function () {
                 CustomerService.update({
                     token: $stateParams.token,
-                    transaction_amount: $stateParams.amount
+                    transaction_amount: $stateParams.amount * -1,
                 }).then(function (result) {
                     $state.go('successModal');
                 }, function (error) {
