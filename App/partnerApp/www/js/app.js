@@ -7,11 +7,16 @@
 // 'starter.controllers' is found in controllers.js
 angular.module('app', ['ionic', 'app.controllers', 'app.routes', 'app.directives', 'app.services', 'restangular'])
 
-    .config(function ($ionicConfigProvider, $sceDelegateProvider) {
+    .config(function ($ionicConfigProvider, $sceDelegateProvider, $httpProvider, RestangularProvider) {
 
         $ionicConfigProvider.backButton.text('').previousTitleText(false);
 
-        $sceDelegateProvider.resourceUrlWhitelist(['self', '*://www.youtube.com/**', '*://player.vimeo.com/video/**']);
+        //Allow header cross domain
+        $httpProvider.defaults.headers.common['Access-Control-Allow-Headers'] = '*';
+        $sceDelegateProvider.resourceUrlWhitelist(['*']);
+
+        // set environnement (prod ou local)
+        RestangularProvider.setBaseUrl('http://146.185.143.127/api');
     })
 
     .run(function ($ionicPlatform) {
