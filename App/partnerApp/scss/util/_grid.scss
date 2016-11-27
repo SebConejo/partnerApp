@@ -7,3 +7,20 @@
 * available width, and the height of each .col with take
 * up the height of the tallest .col in the same .row.
 */
+
+body {
+    font-family: 'Rubik', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+.platform-ios .manual-ios-statusbar-padding{
+    padding-top:20px;
+}
+.manual-remove-top-padding{
+    padding-top:0px;
+}
+.manual-remove-top-padding .scroll{
+    padding-top:0px !important;
+}
